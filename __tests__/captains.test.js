@@ -21,6 +21,22 @@ describe('/captains crud routes', () => {
         }));
     });
 
+    it('#GET /captains/:id should return details about a captain', async () => {
+        const res = await request(app).get('/captains/1');
+        expect(res.status).toEqual(200);
+
+        const captain = res.body;
+
+        expect(captain).toBeInstanceOf(Object);
+        expect(captain).toMatchObject({
+            id: expect.any(String),
+            name: expect.any(String),
+            ship: expect.any(String),
+        });
+        // Nullable columns
+        expect(captain).toHaveProperty('association');
+    });
+
     afterAll(() => {
         pool.end();
     });
