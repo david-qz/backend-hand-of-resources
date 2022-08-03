@@ -37,6 +37,25 @@ describe('/captains crud routes', () => {
         expect(captain).toHaveProperty('association');
     });
 
+    it('#POST /captains should create a new captain', async () => {
+        const newCaptain = {
+            name: 'Captain Nemo',
+            ship: 'Nautilus'
+        };
+
+        const resp = await request(app).post('/captains').send(newCaptain);
+        expect(resp.status).toEqual(200);
+
+        const captain = resp.body;
+
+        expect(captain).toEqual({
+            id: expect.any(String),
+            name: 'Captain Nemo',
+            ship: 'Nautilus',
+            association: null
+        });
+    });
+
     afterAll(() => {
         pool.end();
     });
