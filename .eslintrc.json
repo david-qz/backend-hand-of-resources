@@ -19,10 +19,7 @@
     "no-console": "warn",
     "indent": [
       "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
+      4
     ],
     "quotes": [
       "error",
