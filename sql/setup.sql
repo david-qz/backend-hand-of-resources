@@ -18,7 +18,7 @@ values
     ('Captain Jean Luc Picard', 'USS Enterprise-D', 'United Federation of Planets'),
     ('Captain Ahab', 'Pequod', 'Nantucket Whalers'),
     ('Captain Jack Sparrow', 'Black Pearl', 'Caribbean Pirates'),
-    ('Captain Crunch', 'Guppy', 'Sea of Milk Armada');
+    ('Captain Crunch', 'Guppy', NULL);
 
 create table planets (
     id bigint generated always as identity primary key,
