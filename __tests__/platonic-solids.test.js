@@ -38,6 +38,30 @@ describe('/platonic-solids crud routes', () => {
         });
     });
 
+    it('#POST /platonic-solids should create a new platonic solid', async () => {
+        const newPlatonicSolid = {
+            name: 'square tiling',
+            vertices: 32767,
+            edges: 32767,
+            faces: 32767,
+            schlafliSymbol: '{4, 4}'
+        };
+
+        const resp = await request(app).post('/platonic-solids').send(newPlatonicSolid);
+        expect(resp.status).toEqual(200);
+
+        const platonicSolid = resp.body;
+
+        expect(platonicSolid).toEqual({
+            id: expect.any(String),
+            name: 'square tiling',
+            vertices: 32767,
+            edges: 32767,
+            faces: 32767,
+            schlafliSymbol: '{4, 4}'
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
