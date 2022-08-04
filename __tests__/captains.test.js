@@ -56,6 +56,24 @@ describe('/captains crud routes', () => {
         });
     });
 
+    it('#PUT /captains/:id should update an existing captain', async () => {
+        const updatedPicard = {
+            ship: 'USS Stargazer'
+        };
+
+        const resp = await request(app).put('/captains/1').send(updatedPicard);
+        expect(resp.status).toEqual(200);
+
+        const newPicard = resp.body;
+
+        expect(newPicard).toEqual({
+            id: '1',
+            name: 'Captain Jean Luc Picard',
+            ship: 'USS Stargazer',
+            association: 'United Federation of Planets'
+        });
+    });
+
     afterAll(() => {
         pool.end();
     });
