@@ -74,7 +74,16 @@ describe('/captains crud routes', () => {
         });
     });
 
-    afterAll(() => {
+    it('#DELETE /captains/:id, should delete a captain', async () => {
+        const resp = await request(app).delete('/captains/1');
+        expect(resp.status).toEqual(200);
+
+        const missingCaptainResp = await request(app).get('/captains/1');
+        expect(missingCaptainResp.status).toEqual(404);
+    });
+
+    afterAll(async () => {
+        await setup(pool);
         pool.end();
     });
 });
