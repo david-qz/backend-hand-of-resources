@@ -83,6 +83,14 @@ describe('/planets crud routes', () => {
         });
     });
 
+    it('#DELETE /planets/:id, should delete a planet', async () => {
+        const resp = await request(app).delete('/planets/1');
+        expect(resp.status).toEqual(200);
+
+        const missingPlanetResp = await request(app).get('/planets/1');
+        expect(missingPlanetResp.status).toEqual(404);
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
