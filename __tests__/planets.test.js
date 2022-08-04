@@ -21,6 +21,23 @@ describe('/planets crud routes', () => {
         }));
     });
 
+    it('#GET /planets/:id should return details about a planet', async () => {
+        const res = await request(app).get('/planets/1');
+        expect(res.status).toEqual(200);
+
+        const planet = res.body;
+
+        expect(planet).toBeInstanceOf(Object);
+        expect(planet).toMatchObject({
+            id: expect.any(String),
+            name: expect.any(String),
+            mass_kg: expect.any(String),
+            mean_radius_km: expect.any(String),
+            aphelion_au: expect.any(String),
+            perihelion_au: expect.any(String),
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
