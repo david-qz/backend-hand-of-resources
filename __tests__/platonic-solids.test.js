@@ -21,6 +21,23 @@ describe('/platonic-solids crud routes', () => {
         }));
     });
 
+    it('#GET /platonic-solids/:id should return details about a platonic solid', async () => {
+        const res = await request(app).get('/platonic-solids/1');
+        expect(res.status).toEqual(200);
+
+        const platonicSolid = res.body;
+
+        expect(platonicSolid).toBeInstanceOf(Object);
+        expect(platonicSolid).toMatchObject({
+            id: expect.any(String),
+            name: expect.any(String),
+            vertices: expect.any(Number),
+            edges: expect.any(Number),
+            faces: expect.any(Number),
+            schlafliSymbol: expect.any(String)
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
