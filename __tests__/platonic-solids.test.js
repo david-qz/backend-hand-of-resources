@@ -82,6 +82,14 @@ describe('/platonic-solids crud routes', () => {
         });
     });
 
+    it('#DELETE /platonic-solids/:id, should delete a platonic solid', async () => {
+        const resp = await request(app).delete('/platonic-solids/1');
+        expect(resp.status).toEqual(200);
+
+        const missingPlatonicSolidResp = await request(app).get('/platonic-solids/1');
+        expect(missingPlatonicSolidResp.status).toEqual(404);
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
