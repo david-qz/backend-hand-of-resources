@@ -62,6 +62,26 @@ describe('/platonic-solids crud routes', () => {
         });
     });
 
+    it('#PUT /platonic-solids/:id should update an existing platonic solid', async () => {
+        const updatedCube = {
+            name: 'cube (boring)'
+        };
+
+        const resp = await request(app).put('/platonic-solids/2').send(updatedCube);
+        expect(resp.status).toEqual(200);
+
+        const newCube = resp.body;
+
+        expect(newCube).toEqual({
+            id: '2',
+            name: 'cube (boring)',
+            vertices: 8,
+            edges: 12,
+            faces: 6,
+            schlafliSymbol: '{4, 3}'
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
