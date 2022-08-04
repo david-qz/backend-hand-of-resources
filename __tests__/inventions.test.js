@@ -38,6 +38,28 @@ describe('/inventions crud routes', () => {
         expect(invention).toHaveProperty('year');
     });
 
+    it('#POST /inventions should create a new invention', async () => {
+        const newInvention = {
+            name: 'The Daguerreotype',
+            description: 'The first publicly available photographic process.',
+            inventor: 'Louis Daguerre',
+            year: 1839
+        };
+
+        const resp = await request(app).post('/inventions').send(newInvention);
+        expect(resp.status).toEqual(200);
+
+        const invention = resp.body;
+
+        expect(invention).toEqual({
+            id: expect.any(String),
+            name: 'The Daguerreotype',
+            description: 'The first publicly available photographic process.',
+            inventor: 'Louis Daguerre',
+            year: 1839
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
