@@ -21,6 +21,23 @@ describe('/inventions crud routes', () => {
         }));
     });
 
+    it('#GET /inventions/:id should return details about a invention', async () => {
+        const res = await request(app).get('/inventions/1');
+        expect(res.status).toEqual(200);
+
+        const invention = res.body;
+
+        expect(invention).toBeInstanceOf(Object);
+        expect(invention).toMatchObject({
+            id: expect.any(String),
+            name: expect.any(String),
+            description: expect.any(String)
+        });
+        // Nullable columns
+        expect(invention).toHaveProperty('inventor');
+        expect(invention).toHaveProperty('year');
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
