@@ -53,6 +53,23 @@ describe('/beverages crud routes', () => {
         });
     });
 
+    it('#PUT /beverages/:id should update an existing beverage', async () => {
+        const updatedWater = {
+            name: 'Tap Water'
+        };
+
+        const resp = await request(app).put('/beverages/1').send(updatedWater);
+        expect(resp.status).toEqual(200);
+
+        const newPicard = resp.body;
+
+        expect(newPicard).toEqual({
+            id: '1',
+            name: 'Tap Water',
+            rating: 4
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
