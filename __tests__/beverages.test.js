@@ -21,6 +21,20 @@ describe('/beverages crud routes', () => {
         }));
     });
 
+    it('#GET /beverages/:id should return details about a beverage', async () => {
+        const res = await request(app).get('/beverages/1');
+        expect(res.status).toEqual(200);
+
+        const beverage = res.body;
+
+        expect(beverage).toBeInstanceOf(Object);
+        expect(beverage).toMatchObject({
+            id: expect.any(String),
+            name: expect.any(String),
+            rating: expect.any(Number),
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
