@@ -62,6 +62,27 @@ describe('/planets crud routes', () => {
         });
     });
 
+    it('#PUT /planets/:id should update an existing planet', async () => {
+        const updatedEarth = {
+            aphelion_au: 1,
+            perihelion_au: 1
+        };
+
+        const resp = await request(app).put('/planets/3').send(updatedEarth);
+        expect(resp.status).toEqual(200);
+
+        const newEarth = resp.body;
+
+        expect(newEarth).toEqual({
+            id: '3',
+            name: 'Earth',
+            mass_kg: '5972400000000000000000000',
+            mean_radius_km: '6371.0',
+            aphelion_au: '1',
+            perihelion_au: '1'
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
