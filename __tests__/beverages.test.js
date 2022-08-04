@@ -35,6 +35,24 @@ describe('/beverages crud routes', () => {
         });
     });
 
+    it('#POST /beverages should create a new beverage', async () => {
+        const newBeverage = {
+            name: 'Yerba Mate',
+            rating: '0'
+        };
+
+        const resp = await request(app).post('/beverages').send(newBeverage);
+        expect(resp.status).toEqual(200);
+
+        const beverage = resp.body;
+
+        expect(beverage).toEqual({
+            id: expect.any(String),
+            name: 'Yerba Mate',
+            rating: 0
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
