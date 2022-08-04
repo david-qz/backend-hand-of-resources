@@ -60,6 +60,25 @@ describe('/inventions crud routes', () => {
         });
     });
 
+    it('#PUT /inventions/:id should update an existing invention', async () => {
+        const updatedTelephone = {
+            description: 'Tin cans with a string between them.'
+        };
+
+        const resp = await request(app).put('/inventions/3').send(updatedTelephone);
+        expect(resp.status).toEqual(200);
+
+        const newTelephone = resp.body;
+
+        expect(newTelephone).toEqual({
+            id: '3',
+            description: 'Tin cans with a string between them.',
+            inventor: 'Alexander Graham Bell',
+            name: 'The Telephone',
+            year: 1876
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
