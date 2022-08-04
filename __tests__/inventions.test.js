@@ -79,6 +79,14 @@ describe('/inventions crud routes', () => {
         });
     });
 
+    it('#DELETE /inventions/:id, should delete a invention', async () => {
+        const resp = await request(app).delete('/inventions/1');
+        expect(resp.status).toEqual(200);
+
+        const missingInventionResp = await request(app).get('/inventions/1');
+        expect(missingInventionResp.status).toEqual(404);
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
