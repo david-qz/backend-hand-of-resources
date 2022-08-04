@@ -70,6 +70,14 @@ describe('/beverages crud routes', () => {
         });
     });
 
+    it('#DELETE /beverages/:id, should delete a beverage', async () => {
+        const resp = await request(app).delete('/beverages/1');
+        expect(resp.status).toEqual(200);
+
+        const missingBeverageResp = await request(app).get('/beverages/1');
+        expect(missingBeverageResp.status).toEqual(404);
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
