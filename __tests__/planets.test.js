@@ -38,6 +38,30 @@ describe('/planets crud routes', () => {
         });
     });
 
+    it('#POST /planets should create a new planet', async () => {
+        const newPlanet = {
+            name: 'Pluto',
+            mass_kg: 1.303e22,
+            mean_radius_km: 1188.3,
+            aphelion_au: 49.305,
+            perihelion_au: 29.658
+        };
+
+        const resp = await request(app).post('/planets').send(newPlanet);
+        expect(resp.status).toEqual(200);
+
+        const planet = resp.body;
+
+        expect(planet).toEqual({
+            id: expect.any(String),
+            name: 'Pluto',
+            mass_kg: '13030000000000000000000',
+            mean_radius_km: '1188.3',
+            aphelion_au: '49.305',
+            perihelion_au: '29.658'
+        });
+    });
+
     afterAll(async () => {
         await setup(pool);
         pool.end();
