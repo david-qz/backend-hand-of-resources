@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .mono {
+            font-family: monospace;
+        }
+
+        td {
+            max-width: 350px;
+            padding: 10px;
+        }
+    </style>
+    <title>Resources</title>
+</head>
+<body>
+<h1>Hand of Resoures API</h1>
+
+<h2>Description</h2>
+<p>This app hosts a RESTful JSON API with CRUD routes for five different resources:</p>
+<ul>
+    <li>Beverages on <a href="/beverages" class="mono">/beverages</a></li>
+    <li>Captains on <a href="/captains" class="mono">/captains</a></li>
+    <li>Inventions on <a href="/inventions" class="mono">/inventions</a></li>
+    <li>Planets on <a href="/planets" class="mono">/planets</a></li>
+    <li>Platonic Solids on <a href="/platonic-solids" class="mono">/platonic-solids</a></li>
+</ul>
+
+<h2>Routes</h2>
+<p>The following routes exist for each resource:</p>
+<table>
+    <thead>
+    <tr>
+        <th>Route</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mono">GET /resource</td>
+        <td>Returns with a list of items.</td>
+    </tr>
+    <tr>
+        <td class="mono">GET /resource/:id</td>
+        <td>Returns with details about item with given id.</td>
+    </tr>
+    <tr>
+        <td class="mono">POST /resource</td>
+        <td>Adds an item to the database, returning the full item back.</td>
+    </tr>
+    <tr>
+        <td class="mono">PUT /resource/:id</td>
+        <td>Updates an item in the database, returning the full item back.</td>
+    </tr>
+    <tr>
+        <td class="mono">DELETE /resource/:id</td>
+        <td>Deletes an item from the database, returning the deleted item back.</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
